@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge DGM</title>
+    <style>
+        .container {
+            display: block;
+            /* width: 50vw; */
+            position: relative;
+        }
+
+        .container canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <img src="https://cmedia.dayta.asia/raw_xxx/20220501/td0040/td0040_20220501100534269_133159.jpg" alt="image">
+        <canvas id="labelCanvas"></canvas>
+
+
+    </div>
+</body>
+<script>
+    const coordinates = [
+        [708, 23.000000000000004],
+        [708, 257],
+        [970, 257],
+        [970, 23.000000000000004]
+    ];
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.querySelector(".container");
+        const image = container.querySelector("img");
+        const canvas = container.querySelector("#labelCanvas");
+        const ctx = canvas.getContext("2d");
+
+
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+
+        ctx.strokeStyle = "green";
+        ctx.lineWidth = 4;
+
+        ctx.beginPath();
+        coordinates.forEach((coord, index) => {
+            // const x = (coord[0] / image.width) * canvas.width;
+            // const y = (coord[1] / image.height) * canvas.height;
+            const x = coord[0]
+            const y = coord[1]
+            if (index === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+        ctx.closePath();
+        ctx.stroke();
+    });
+</script>
+
+</html>
