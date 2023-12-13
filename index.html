@@ -36,44 +36,50 @@
 
 
     </div>
-</body>
-<script>
-    const coordinates = [
-        [708, 23.000000000000004],
-        [708, 257],
-        [970, 257],
-        [970, 23.000000000000004]
-    ];
+    <script>
+        const coordinates = [
+            [708, 23.000000000000004],
+            [708, 257],
+            [970, 257],
+            [970, 23.000000000000004]
+        ];
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const container = document.querySelector(".container");
-        const image = container.querySelector("img");
-        const canvas = container.querySelector("#labelCanvas");
-        const ctx = canvas.getContext("2d");
+        document.addEventListener("DOMContentLoaded", function () {
+            const container = document.querySelector(".container");
+            const image = container.querySelector("img");
+            const canvas = container.querySelector("#labelCanvas");
+            const ctx = canvas.getContext("2d");
 
+            function drawCanvas() {
+                canvas.width = image.width;
+                canvas.height = image.height;
 
-        canvas.width = image.width;
-        canvas.height = image.height;
+                ctx.strokeStyle = "green";
+                ctx.lineWidth = 4;
 
-
-        ctx.strokeStyle = "green";
-        ctx.lineWidth = 4;
-
-        ctx.beginPath();
-        coordinates.forEach((coord, index) => {
-            // const x = (coord[0] / image.width) * canvas.width;
-            // const y = (coord[1] / image.height) * canvas.height;
-            const x = coord[0]
-            const y = coord[1]
-            if (index === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
+                ctx.beginPath();
+                coordinates.forEach((coord, index) => {
+                    const x = coord[0];
+                    const y = coord[1];
+                    if (index === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                });
+                ctx.closePath();
+                ctx.stroke();
             }
+
+
+            image.addEventListener("load", function () {
+
+                drawCanvas();
+            });
         });
-        ctx.closePath();
-        ctx.stroke();
-    });
-</script>
+
+    </script>
+</body>
+
 
 </html>
